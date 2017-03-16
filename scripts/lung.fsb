@@ -5,11 +5,11 @@ struct Point {
    y:float;
 }
 
-Table Contour {
+table Contour {
    points:[Point];
 }
 
-Table Nodule {
+table Nodule {
    nodule_id:string;        //unique id for this nodule
    locus:Point;             //approximate centroid of the nodule (optional)
    ROI:Contour;             //points that outline the region of interest (optional)
@@ -20,10 +20,10 @@ Table Nodule {
    margin:int;              //how well-defined the margins of the nodule are
    spiculation:int;         //amount of speculation present in nodule
    texture:int;             //internal texture or composition of nodule
-   malignancy:int;          //subjective assessment of likelihood of malignancy of this nodule, ASSUMING  60-year-old male smoker 
+   malignancy:int;          //subjective assessment of likelihood of malignancy of this nodule, ASSUMING  60-year-old male smoker
 }
 
-Table LungImage {
+table LungImage {
    study_instance_UID:string;
    series_instance_UID:string;
    image_SOP_UID:string;
@@ -32,7 +32,7 @@ Table LungImage {
    nodules:[Nodule];
 }
 
-Table DataSet {
+table DataSet {
    data:[LungImage];
 }
 
