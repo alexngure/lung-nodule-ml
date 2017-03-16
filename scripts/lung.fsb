@@ -1,0 +1,39 @@
+namespace LungData;
+
+struct Point {
+   x:float;
+   y:float;
+}
+
+Table Contour {
+   points:[Point];
+}
+
+Table Nodule {
+   nodule_id:string;        //unique id for this nodule
+   locus:Point;             //approximate centroid of the nodule (optional)
+   ROI:Contour;             //points that outline the region of interest (optional)
+   inclusion:bool;          //whether or not the described ROI is included as part of the nodule
+   subtlety:int;            //approximate difficulty of detecting this nodule (1-5)
+   internal_structure:int;  //expected internal structure (soft tissue, fluid, fat, air) (1-4)
+   sphericity:int;          //the roundness of the nodule
+   margin:int;              //how well-defined the margins of the nodule are
+   spiculation:int;         //amount of speculation present in nodule
+   texture:int;             //internal texture or composition of nodule
+   malignancy:int;          //subjective assessment of likelihood of malignancy of this nodule, ASSUMING  60-year-old male smoker 
+}
+
+Table LungImage {
+   study_instance_UID:string;
+   series_instance_UID:string;
+   image_SOP_UID:string;
+   case_ID:string;
+   filepath:string;
+   nodules:[Nodule];
+}
+
+Table DataSet {
+   data:[LungImage];
+}
+
+root_type DataSet;
