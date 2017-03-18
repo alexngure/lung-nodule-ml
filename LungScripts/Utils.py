@@ -32,7 +32,7 @@ def outline_nodules(im,dest,sep=True):
     resulting png to dest. By default, the method will output a
     separate image for each Nodule in im. Set sep=False to create a single 
     image.
-    """"
+    """
     return
 
 def fill_nodules(im,dest,sep=True):
@@ -40,7 +40,7 @@ def fill_nodules(im,dest,sep=True):
     Fills each Nodule found in im and outputs the resulting png to dest. By default, 
     the method will output separate image for each Nodule in im. Set sep=False 
     to create a single image.
-    """"
+    """
     return
 
 def process_study(src):
