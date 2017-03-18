@@ -18,7 +18,7 @@ table Nodule {
    internal_structure:int;  //expected internal structure (soft tissue, fluid, fat, air) (1-4)
    sphericity:int;          //the roundness of the nodule
    margin:int;              //how well-defined the margins of the nodule are
-   spiculation:int;         //amount of speculation present in nodule
+   spiculation:int;         //amount of spiculation present in nodule
    texture:int;             //internal texture or composition of nodule
    malignancy:int;          //subjective assessment of likelihood of malignancy of this nodule, ASSUMING  60-year-old male smoker
 }
