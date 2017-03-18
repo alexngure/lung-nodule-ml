@@ -1,5 +1,4 @@
 import os
-import progressbar
 import dicom
 import xml.etree.ElementTree as ET
 from PIL import Image
@@ -51,15 +50,12 @@ def process_study(src):
     """
     dcm_map = {}
     for root,dirs,files in os.walk(src):
-        pbar = progressbar.progressBar(max_value=len(files), redirect_stdout=True)
-        i=0
         for file in files:
             file_ext = file.split('.')[1]
             if file_ext == 'dcm':
                 filepath = os.path.join(root,file)
                 dcmfile = dicom.read_file(filepath)
                 dcm_map[dcmfile.SOPInstanceUID] = filepath
-            pbar.update(i+=1)
     return dcm_map
 
 
