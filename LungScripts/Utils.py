@@ -25,6 +25,24 @@ def extract_nodules(src):
     Parses and LIDC xml file src and returns the list of Nodules found
     """
     xmlns                     = "{http://www.nih.gov}"
+    read_session_key          = xmlns + "unblindedReadNodule"
+    nodule_ID_key             = xmlns + "noduleID"
+    characteristics_key       = xmlns + "characteristics"
+    roi_key                   = xmlns + "roi"
+    image_UID_key             = xmlns + "imageSOP_UID"
+    inclusion_key             = xmlns + "inclusion"
+    edgemap_key               = xmlns + "edgeMap"
+    x_coord_key               = xmlns + "xCoord"
+    y_coord_key               = xmlns + "yCoord"
+    ch_subtlety_key           = xmlns + "subtlety"
+    ch_internal_structure_key = xmlns + "internalStructure"
+    ch_calcification_key      = xmlns + "calcification"
+    ch_sphericity_key         = xmlns + "sphericity"
+    ch_margin_key             = xmlns + "margin"
+    ch_lobulation_key         = xmlns + "lobulation"
+    ch_spiculation_key        = xmlns + "spiculation"
+    ch_texture_key            = xmlns + "texture"
+    ch_malignancy_key         = xmlns + "malignancy"
     return nodule_list
 
 def outline_nodules(im,dest,sep=True):
