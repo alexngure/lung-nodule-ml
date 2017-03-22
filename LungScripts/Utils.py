@@ -47,6 +47,10 @@ def extract_nodules(src):
     xml_tree      = ET.parse(src)
     read_sessions = xml_tree.getroot().iter(read_session_key)
     nodule_list   = [] 
+    
+    for session in read_sessions:
+        nodule_id       = session.find(nodule_ID_key).text
+        characteristics = session.find(characteristics_key) 
     return nodule_list
 
 def outline_nodules(im,dest,sep=True):
