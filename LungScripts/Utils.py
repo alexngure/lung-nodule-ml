@@ -22,7 +22,7 @@ def show_image(im):
 
 def extract_nodules(src):
     """
-    Parses and LIDC xml file src and returns the list of Nodules found
+    Parses an LIDC xml file src and returns the list of Nodules found
     """
     xmlns                     = "{http://www.nih.gov}"
     read_session_key          = xmlns + "unblindedReadNodule"
