@@ -64,6 +64,11 @@ def extract_nodules(src):
         for roi in session.findall(roi_key):
             image_UID = roi.find(image_UID_key).text
             inclusion = roi.find(inclusion_key)
+            contour   = []
+            for point in roi.findall(edgemap_key):
+                x_coord = point.find(x_coord_key).text
+                y_coord = point.find(y_coord_key).text
+                contour.append((int(x_coord),int(y_coord)))
     return nodule_list
 
 def outline_nodules(im,dest,sep=True):
