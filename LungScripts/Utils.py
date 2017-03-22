@@ -51,6 +51,16 @@ def extract_nodules(src):
     for session in read_sessions:
         nodule_id       = session.find(nodule_ID_key).text
         characteristics = session.find(characteristics_key) 
+        if characteristics is not None:
+            subtlety           = characteristics.find(ch_subtlety_key).text
+            internal_structure = characteristics.find(ch_internal_structure_key).text
+            calcification      = characteristics.find(ch_calcification_key).text
+            sphericity         = characteristics.find(ch_sphericity_key).text
+            margin             = characteristics.find(ch_margin_key).text
+            lobulation         = characteristics.find(ch_lobulation_key).text
+            spiculation        = characteristics.find(ch_spiculation_key).text
+            texture            = characteristics.find(ch_texture_key).text
+            malignancy         = characteristics.find(ch_malignancy_key).text
     return nodule_list
 
 def outline_nodules(im,dest,sep=True):
