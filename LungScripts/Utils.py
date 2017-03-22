@@ -22,7 +22,7 @@ def show_image(im):
 
 def extract_nodules(src):
     """
-    Parses xml file src and returns the list of Nodules found
+    Parses and LIDC xml file src and returns the list of Nodules found
     """
     return
 
