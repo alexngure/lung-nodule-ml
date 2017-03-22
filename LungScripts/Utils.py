@@ -61,6 +61,9 @@ def extract_nodules(src):
             spiculation        = characteristics.find(ch_spiculation_key).text
             texture            = characteristics.find(ch_texture_key).text
             malignancy         = characteristics.find(ch_malignancy_key).text
+        for roi in session.findall(roi_key):
+            image_UID = roi.find(image_UID_key).text
+            inclusion = roi.find(inclusion_key)
     return nodule_list
 
 def outline_nodules(im,dest,sep=True):
