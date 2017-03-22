@@ -43,6 +43,9 @@ def extract_nodules(src):
     ch_spiculation_key        = xmlns + "spiculation"
     ch_texture_key            = xmlns + "texture"
     ch_malignancy_key         = xmlns + "malignancy"
+    
+    xml_tree      = ET.parse(src)
+    read_sessions = xml_tree.getroot().iter(read_session_key)
     return nodule_list
 
 def outline_nodules(im,dest,sep=True):
