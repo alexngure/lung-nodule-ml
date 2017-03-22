@@ -24,7 +24,7 @@ def extract_nodules(src):
     """
     Parses and LIDC xml file src and returns the list of Nodules found
     """
-    return
+    return nodule_list
 
 def outline_nodules(im,dest,sep=True):
     """
