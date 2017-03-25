@@ -157,6 +157,16 @@ def extract_nodules(src):
             spiculation        = characteristics.find(ch_spiculation_key).text
             texture            = characteristics.find(ch_texture_key).text
             malignancy         = characteristics.find(ch_malignancy_key).text
+            char_object        = Characteristics()
+            char_object.set_subtlety(int(subtlety))
+            char_object.set_internal_structure(int(internal_structure))
+            char_object.set_calcification(int(calcification))
+            char_object.set_sphericity(int(sphericity))
+            char_object.set_margin(int(margin))
+            char_object.set_lobulation(int(lobulation))
+            char_object.set_spiculation(int(spiculation))
+            char_object.set_texture(int(texture))
+            char_object.set_malignancy(int(malignancy))
         for roi in session.findall(roi_key):
             image_UID = roi.find(image_UID_key).text
             inclusion = roi.find(inclusion_key)
