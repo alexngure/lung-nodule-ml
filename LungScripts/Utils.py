@@ -92,7 +92,27 @@ class Characteristics(object):
 
     def malignancy():
         return self._malignancy
+
+class Nodule(object):
+    """A non-flatbuffers implementation of the Nodule class.
     """
+    def __init__(self, nodule_ID):
+        self._nodule_ID = nodule_ID
+        self._characteristics = Characteristics()
+        self._roi_list = []
+
+    def nodule_ID():
+        return self._nodule_ID
+
+    def characteristics():
+        return self._characteristics
+
+    def add_characteristics(characteristics_):
+        self._characteristics = characteristics_
+
+    def add_ROI(roi_):
+        self._roi_list.append(roi_)
+
     return
 
 def show_image(im):
