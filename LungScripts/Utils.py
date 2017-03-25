@@ -145,7 +145,8 @@ def extract_nodules(src):
     
     for session in read_sessions:
         nodule_id       = session.find(nodule_ID_key).text
-        characteristics = session.find(characteristics_key) 
+        characteristics = session.find(characteristics_key)
+        nodule = Nodule(nodule_id)
         if characteristics is not None:
             subtlety           = characteristics.find(ch_subtlety_key).text
             internal_structure = characteristics.find(ch_internal_structure_key).text
