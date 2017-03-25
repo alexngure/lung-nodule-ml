@@ -175,7 +175,7 @@ def extract_nodules(src):
             for point in roi.findall(edgemap_key):
                 x_coord = point.find(x_coord_key).text
                 y_coord = point.find(y_coord_key).text
-                contour.append((int(x_coord),int(y_coord)))
+                roi_outline.append((int(x_coord),int(y_coord)))
     return nodule_list
 
 def outline_nodules(im,dest,sep=True):
