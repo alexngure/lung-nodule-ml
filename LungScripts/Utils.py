@@ -5,8 +5,27 @@ from PIL import Image
 
 
 def print_image(im,dest):
+class ROI(object):
+    """A non-flatbuffers implementation of the Contour class. Created
+    primarily to hold the Nodule information returned from the xml
+    processing function where we're not really using any flatbuffer
+    functionality, but still need a clean way to represent this information.
     """
     Takes a LungImage im and outputs a png to dest.
+    def __init__(self, image_UID,inclusion,contour):
+        self._image_UID = image_UID
+        self._inclusion = inclusion
+        self._contour = contour
+
+    def image_UID():
+        return self._image_UID
+
+    def inclusion():
+        return self._inclusion
+
+    def contour():
+        return self._contour
+
     """
     return
 
