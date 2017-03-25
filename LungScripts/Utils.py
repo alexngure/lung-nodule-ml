@@ -167,6 +167,7 @@ def extract_nodules(src):
             char_object.set_spiculation(int(spiculation))
             char_object.set_texture(int(texture))
             char_object.set_malignancy(int(malignancy))
+            nodule.addCharacteristics(char_object)
         for roi in session.findall(roi_key):
             image_UID = roi.find(image_UID_key).text
             inclusion = roi.find(inclusion_key)
