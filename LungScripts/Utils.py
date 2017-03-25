@@ -178,6 +178,7 @@ def extract_nodules(src):
                 roi_outline.append((int(x_coord),int(y_coord)))
             roi_object = ROI(image_UID,inclusion,roi_outline)
             nodule.addROI(roi_object)
+        nodule_list.append(nodule)
     return nodule_list
 
 def outline_nodules(im,dest,sep=True):
