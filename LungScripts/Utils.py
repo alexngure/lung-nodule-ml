@@ -92,21 +92,21 @@ class Characteristics(object):
 class Nodule(object):
     """A non-flatbuffers implementation of the Nodule class.
     """
-    def __init__(self, nodule_ID):
-        self._nodule_ID = nodule_ID
+    def __init__(self, nodule_id):
+        self._noduleID = nodule_id
         self._characteristics = Characteristics()
         self._roi_list = []
 
-    def nodule_ID():
-        return self._nodule_ID
+    def noduleID():
+        return self._noduleID
 
     def characteristics():
         return self._characteristics
 
-    def add_characteristics(characteristics_):
+    def addCharacteristics(characteristics_):
         self._characteristics = characteristics_
 
-    def add_ROI(roi_):
+    def addROI(roi_):
         self._roi_list.append(roi_)
 
 def print_image(im,dest):
@@ -159,7 +159,7 @@ def extract_nodules(src):
         for roi in session.findall(roi_key):
             image_UID = roi.find(image_UID_key).text
             inclusion = roi.find(inclusion_key)
-            contour   = []
+            roi_outline   = []
             for point in roi.findall(edgemap_key):
                 x_coord = point.find(x_coord_key).text
                 y_coord = point.find(y_coord_key).text
