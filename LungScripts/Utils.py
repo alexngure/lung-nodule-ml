@@ -3,10 +3,6 @@ import dicom
 import xml.etree.ElementTree as ET
 from PIL import Image
 
-import Point
-import Contour
-import Nodule
-import LungImage
 
 def print_image(im,dest):
     """
