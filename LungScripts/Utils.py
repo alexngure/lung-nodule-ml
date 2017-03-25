@@ -66,10 +66,8 @@ class Characteristics(object):
 
     def subtlety():
         return self._subtlety
-        
     def internal_structure():
         return self._internal_structure
-
     def calcification():
         return self._calcification
 
@@ -140,10 +138,10 @@ def extract_nodules(src):
     ch_spiculation_key        = xmlns + "spiculation"
     ch_texture_key            = xmlns + "texture"
     ch_malignancy_key         = xmlns + "malignancy"
-    
+
     xml_tree      = ET.parse(src)
     read_sessions = xml_tree.getroot().iter(read_session_key)
-    nodule_list   = [] 
+    nodule_list   = []
     
     for session in read_sessions:
         nodule_id       = session.find(nodule_ID_key).text
@@ -198,16 +196,3 @@ def process_study(src):
                 dcmfile = dicom.read_file(filepath)
                 dcm_map[dcmfile.SOPInstanceUID] = filepath
     return dcm_map
-
-
-
-
-
-
-
-
-
-
-
-
-
