@@ -4,14 +4,12 @@ import xml.etree.ElementTree as ET
 from PIL import Image
 
 
-def print_image(im,dest):
 class ROI(object):
     """A non-flatbuffers implementation of the Contour class. Created
     primarily to hold the Nodule information returned from the xml
     processing function where we're not really using any flatbuffer
     functionality, but still need a clean way to represent this information.
     """
-    Takes a LungImage im and outputs a png to dest.
     def __init__(self, image_UID,inclusion,contour):
         self._image_UID = image_UID
         self._inclusion = inclusion
@@ -113,6 +111,8 @@ class Nodule(object):
     def add_ROI(roi_):
         self._roi_list.append(roi_)
 
+def print_image(im,dest):
+    """Takes a LungImage im and outputs a png to dest."""
     return
 
 def show_image(im):
