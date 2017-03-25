@@ -26,6 +26,72 @@ class ROI(object):
     def contour():
         return self._contour
 
+class Characteristics(object):
+    """A class to hold a Nodule's characteristic information"""
+    def __init__(self):
+        self._subtlety           = -1
+        self._internal_structure = -1
+        self._calcification      = -1
+        self._sphericity         = -1
+        self._margin             = -1
+        self._lobulation         = -1
+        self._spiculation        = -1
+        self._texture            = -1
+        self._malignancy         = -1
+
+    def set_subtlety(val):
+        self._subtlety = val
+
+    def set_internal_structure(val):
+        self._internal_structure = val
+
+    def set_calcification(val):
+        self._calcification = val
+
+    def set_sphericity(val):
+        self._sphericity = val
+
+    def set_margin(val):
+        self._margin = val
+
+    def set_lobulation(val):
+        self._lobulation = val
+
+    def set_spiculation(val):
+        self._spiculation = val
+
+    def set_texture(val):
+        self._texture = val
+
+    def set_malignancy(val):
+        self._malignancy = val
+
+    def subtlety():
+        return self._subtlety
+        
+    def internal_structure():
+        return self._internal_structure
+
+    def calcification():
+        return self._calcification
+
+    def sphericity():
+        return self._sphericity
+
+    def margin():
+        return self._margin
+
+    def lobulation():
+        return self._lobulation
+
+    def spiculation():
+        return self._spiculation
+
+    def texture():
+        return self._texture
+
+    def malignancy():
+        return self._malignancy
     """
     return
 
