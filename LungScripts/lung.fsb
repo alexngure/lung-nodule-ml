@@ -19,6 +19,8 @@ table Nodule {
    sphericity:int;          //the roundness of the nodule
    margin:int;              //how well-defined the margins of the nodule are
    spiculation:int;         //amount of spiculation present in nodule
+   calcification:int;       //pattern of calcification if present (1-5)
+   lobulation:int;          //
    texture:int;             //internal texture or composition of nodule
    malignancy:int;          //subjective assessment of likelihood of malignancy of this nodule, ASSUMING  60-year-old male smoker
 }
