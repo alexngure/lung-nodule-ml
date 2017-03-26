@@ -25,15 +25,6 @@ table Nodule {
    malignancy:int;          //subjective assessment of likelihood of malignancy of this nodule, ASSUMING  60-year-old male smoker
 }
 
-table LungImage {
-   study_instance_UID:string;
-   series_instance_UID:string;
-   image_SOP_UID:string;
-   case_ID:string;
-   filepath:string;
-   nodules:[Nodule];
-}
-
 table DataSet {
    data:[Nodule];
 }
