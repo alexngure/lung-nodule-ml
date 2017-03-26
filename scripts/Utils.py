@@ -205,12 +205,6 @@ def outline_nodule(dcm,contour,dest,color='red'):
     im.save(dest)
     return
 
-def fill_nodule(dcm,countour,dest,color='red'):
-    """Takes DICOM file dcm, fills the region outlined by countour (list of (x,y)
-    coordinates), and outputs the resulting image to dest.
-    """
-    return
-
 def print_image(dcm,dest):
     """Takes DICOM file dcm and outputs its pixel data to dest as an
     image."""
@@ -226,10 +220,8 @@ def show_image(dcm):
     im.show()
     return
 
-
-
-
-
-
-
-
+def fill_nodule(dcm,countour,dest,color='red'):
+    """Takes DICOM file dcm, fills the region outlined by countour (list of (x,y)
+    coordinates), and outputs the resulting image to dest.
+    """
+    return
