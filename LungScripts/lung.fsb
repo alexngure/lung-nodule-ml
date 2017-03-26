@@ -12,6 +12,9 @@ table Contour {
 }
 
 table Nodule {
+   study_instance_UID:string;
+   series_instance_UID:string;
+   case_ID:string;
    nodule_id:string;        //unique id for this nodule
    ROI:[Contour];           //points that outline the region of interest (optional)
    subtlety:int;            //approximate difficulty of detecting this nodule (1-5)

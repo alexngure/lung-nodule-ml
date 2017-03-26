@@ -19,15 +19,36 @@ class Nodule(object):
         self._tab = flatbuffers.table.Table(buf, pos)
 
     # Nodule
-    def NoduleId(self):
+    def StudyInstanceUID(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
         return ""
 
     # Nodule
-    def ROI(self, j):
+    def SeriesInstanceUID(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        if o != 0:
+            return self._tab.String(o + self._tab.Pos)
+        return ""
+
+    # Nodule
+    def CaseID(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            return self._tab.String(o + self._tab.Pos)
+        return ""
+
+    # Nodule
+    def NoduleId(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        if o != 0:
+            return self._tab.String(o + self._tab.Pos)
+        return ""
+
+    # Nodule
+    def ROI(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
         if o != 0:
             x = self._tab.Vector(o)
             x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
@@ -40,85 +61,88 @@ class Nodule(object):
 
     # Nodule
     def ROILength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
         if o != 0:
             return self._tab.VectorLen(o)
         return 0
 
     # Nodule
     def Subtlety(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
-        if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
-        return 0
-
-    # Nodule
-    def InternalStructure(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
-        if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
-        return 0
-
-    # Nodule
-    def Calcification(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
-        if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
-        return 0
-
-    # Nodule
-    def Sphericity(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
         return 0
 
     # Nodule
-    def Margin(self):
+    def InternalStructure(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
         return 0
 
     # Nodule
-    def Lobulation(self):
+    def Calcification(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
         return 0
 
     # Nodule
-    def Spiculation(self):
+    def Sphericity(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(20))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
         return 0
 
     # Nodule
-    def Texture(self):
+    def Margin(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(22))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
         return 0
 
     # Nodule
-    def Malignancy(self):
+    def Lobulation(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(24))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
         return 0
 
-def NoduleStart(builder): builder.StartObject(11)
-def NoduleAddNoduleId(builder, noduleId): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(noduleId), 0)
-def NoduleAddROI(builder, ROI): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(ROI), 0)
+    # Nodule
+    def Spiculation(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(26))
+        if o != 0:
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
+        return 0
+
+    # Nodule
+    def Texture(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(28))
+        if o != 0:
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
+        return 0
+
+    # Nodule
+    def Malignancy(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(30))
+        if o != 0:
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
+        return 0
+
+def NoduleStart(builder): builder.StartObject(14)
+def NoduleAddStudyInstanceUID(builder, studyInstanceUID): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(studyInstanceUID), 0)
+def NoduleAddSeriesInstanceUID(builder, seriesInstanceUID): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(seriesInstanceUID), 0)
+def NoduleAddCaseID(builder, caseID): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(caseID), 0)
+def NoduleAddNoduleId(builder, noduleId): builder.PrependUOffsetTRelativeSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(noduleId), 0)
+def NoduleAddROI(builder, ROI): builder.PrependUOffsetTRelativeSlot(4, flatbuffers.number_types.UOffsetTFlags.py_type(ROI), 0)
 def NoduleStartROIVector(builder, numElems): return builder.StartVector(4, numElems, 4)
-def NoduleAddSubtlety(builder, subtlety): builder.PrependInt32Slot(2, subtlety, 0)
-def NoduleAddInternalStructure(builder, internalStructure): builder.PrependInt32Slot(3, internalStructure, 0)
-def NoduleAddCalcification(builder, calcification): builder.PrependInt32Slot(4, calcification, 0)
-def NoduleAddSphericity(builder, sphericity): builder.PrependInt32Slot(5, sphericity, 0)
-def NoduleAddMargin(builder, margin): builder.PrependInt32Slot(6, margin, 0)
-def NoduleAddLobulation(builder, lobulation): builder.PrependInt32Slot(7, lobulation, 0)
-def NoduleAddSpiculation(builder, spiculation): builder.PrependInt32Slot(8, spiculation, 0)
-def NoduleAddTexture(builder, texture): builder.PrependInt32Slot(9, texture, 0)
-def NoduleAddMalignancy(builder, malignancy): builder.PrependInt32Slot(10, malignancy, 0)
+def NoduleAddSubtlety(builder, subtlety): builder.PrependInt32Slot(5, subtlety, 0)
+def NoduleAddInternalStructure(builder, internalStructure): builder.PrependInt32Slot(6, internalStructure, 0)
+def NoduleAddCalcification(builder, calcification): builder.PrependInt32Slot(7, calcification, 0)
+def NoduleAddSphericity(builder, sphericity): builder.PrependInt32Slot(8, sphericity, 0)
+def NoduleAddMargin(builder, margin): builder.PrependInt32Slot(9, margin, 0)
+def NoduleAddLobulation(builder, lobulation): builder.PrependInt32Slot(10, lobulation, 0)
+def NoduleAddSpiculation(builder, spiculation): builder.PrependInt32Slot(11, spiculation, 0)
+def NoduleAddTexture(builder, texture): builder.PrependInt32Slot(12, texture, 0)
+def NoduleAddMalignancy(builder, malignancy): builder.PrependInt32Slot(13, malignancy, 0)
 def NoduleEnd(builder): return builder.EndObject()
