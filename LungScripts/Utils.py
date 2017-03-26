@@ -208,4 +208,7 @@ def print_image(dcm,dest):
 
 def show_image(dcm):
     """Takes DICOM file dcm and presents it as a png in a modal view."""
+    dataset = dicom.read_file(dcm)
+    im = pdp.get_image(dataset)
+    im.show()
     return
