@@ -1,7 +1,7 @@
 import os
 import dicom
 import xml.etree.ElementTree as ET
-import pydicom_PIL as pdp
+import OSS.pydicom_PIL as pdp
 from PIL import Image
 
 
@@ -43,7 +43,7 @@ class Characteristics(object):
 
     def set_internal_structure(val):
         self._internal_structure = val
-
+        
     def set_calcification(val):
         self._calcification = val
 
