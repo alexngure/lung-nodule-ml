@@ -15,12 +15,12 @@ table Nodule {
    nodule_id:string;        //unique id for this nodule
    ROI:[Contour];           //points that outline the region of interest (optional)
    subtlety:int;            //approximate difficulty of detecting this nodule (1-5)
-   internal_structure:int;  //expected internal structure (soft tissue, fluid, fat, air) (1-4)
-   sphericity:int;          //the roundness of the nodule
-   margin:int;              //how well-defined the margins of the nodule are
-   spiculation:int;         //amount of spiculation present in nodule
+   internal_structure:int;  //expected internal structure (soft tissue, fluid, fat, air) (1-5)
    calcification:int;       //pattern of calcification if present (1-5)
+   sphericity:int;          //the roundness of the nodule (1-5)
+   margin:int;              //how well-defined the margins of the nodule are (1-5)
    lobulation:int;          //
+   spiculation:int;         //amount of spiculation present in nodule (1-5)
    texture:int;             //internal texture or composition of nodule
    malignancy:int;          //subjective assessment of likelihood of malignancy of this nodule, ASSUMING  60-year-old male smoker
 }
