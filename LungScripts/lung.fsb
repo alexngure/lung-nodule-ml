@@ -13,7 +13,6 @@ table Contour {
 
 table Nodule {
    nodule_id:string;        //unique id for this nodule
-   locus:Point;             //approximate centroid of the nodule (optional)
    ROI:Contour;             //points that outline the region of interest (optional)
    subtlety:int;            //approximate difficulty of detecting this nodule (1-5)
    internal_structure:int;  //expected internal structure (soft tissue, fluid, fat, air) (1-4)
