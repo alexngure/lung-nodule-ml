@@ -35,7 +35,7 @@ table LungImage {
 }
 
 table DataSet {
-   data:[LungImage];
+   data:[Nodule];
 }
 
 root_type DataSet;
