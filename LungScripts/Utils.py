@@ -191,21 +191,19 @@ def process_study(src):
                 dcm_map[dcmfile.SOPInstanceUID] = filepath
     return dcm_map
 
-def outline_nodule(dcm,contour,dest="."):
+def outline_nodule(dcm,contour,dest):
     """Takes DICOM file dcm, overlays the contour (list of (x,y) cordinates) and
-    outputs the resulting png to dest.
+    outputs the resulting image to dest.
     """
     return
 
-def fill_nodule(dcm,countour,dest="."):
+def fill_nodule(dcm,countour,dest):
     """Takes DICOM file dcm, fills the region outlined by countour (list of (x,y)
-    coordinates), and outputs the resulting png to dest.
+    coordinates), and outputs the resulting image to dest.
     """
     return
 
 def print_image(dcm,dest):
-    """Takes DICOM file dcm and outputs its pixel data as
-    png in dest."""
     return
 
 def show_image(dcm):
