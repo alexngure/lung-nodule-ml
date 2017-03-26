@@ -184,13 +184,13 @@ def extract_nodules(src):
         nodule_list.append(nodule)
     return nodule_list
 
-def outline_nodules(dcm,contour,dest="."):
+def outline_nodule(dcm,contour,dest="."):
     """Takes DICOM file dcm, overlays the contour (list of (x,y) cordinates) and 
     outputs the resulting png to dest.
     """
     return
 
-def fill_nodules(dcm,countour,dest="."):
+def fill_nodule(dcm,countour,dest="."):
     """Takes DICOM file dcm, fills the region outlined by countour (list of (x,y)
     coordinates), and outputs the resulting png to dest.
     """
