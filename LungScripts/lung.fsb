@@ -16,7 +16,7 @@ table Nodule {
    series_instance_UID:string;
    case_ID:string;
    nodule_id:string;        //unique id for this nodule
-   ROI:[Contour];           //points that outline the region of interest (optional)
+   ROI:[Contour];           //a list of the the regions of interest for this nodule
    subtlety:int;            //approximate difficulty of detecting this nodule (1-5)
    internal_structure:int;  //expected internal structure (soft tissue, fluid, fat, air) (1-5)
    calcification:int;       //pattern of calcification if present (1-5)
