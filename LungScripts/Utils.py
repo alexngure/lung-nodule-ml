@@ -196,6 +196,13 @@ def outline_nodule(dcm,contour,dest,color='red'):
     """Takes DICOM file dcm, overlays the contour (list of (x,y) cordinates) and
     outputs the resulting image to dest.
     """
+    color = ImageColor.getrgb(color)
+    dataset = dicom.read_file(dcm)
+    im = pdp.get_image(dataset)
+    im = im.convert('RGB')
+    draw = ImageDraw.Draw(im)
+    draw.line(contour,color)
+    im.save(dest)
     return
 
 def fill_nodule(dcm,countour,dest,color='red'):
