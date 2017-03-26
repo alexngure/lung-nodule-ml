@@ -2,7 +2,7 @@ import os
 import dicom
 import xml.etree.ElementTree as ET
 import OSS.pydicom_PIL as pdp
-from PIL import Image
+from PIL import Image,ImageColor,ImageDraw
 
 
 class ROI(object):
