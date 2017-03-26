@@ -16,13 +16,13 @@ class ROI(object):
         self._inclusion = inclusion
         self._contour = contour
 
-    def image_UID():
+    def image_UID(self):
         return self._image_UID
 
-    def inclusion():
+    def inclusion(self):
         return self._inclusion
 
-    def contour():
+    def contour(self):
         return self._contour
 
 class Characteristics(object):
@@ -38,58 +38,58 @@ class Characteristics(object):
         self._texture            = -1
         self._malignancy         = -1
 
-    def set_subtlety(val):
+    def set_subtlety(self,val):
         self._subtlety = val
 
-    def set_internal_structure(val):
+    def set_internal_structure(self,val):
         self._internal_structure = val
         
-    def set_calcification(val):
+    def set_calcification(self,val):
         self._calcification = val
 
-    def set_sphericity(val):
+    def set_sphericity(self,val):
         self._sphericity = val
 
-    def set_margin(val):
+    def set_margin(self,val):
         self._margin = val
 
-    def set_lobulation(val):
+    def set_lobulation(self,val):
         self._lobulation = val
 
-    def set_spiculation(val):
+    def set_spiculation(self,val):
         self._spiculation = val
 
-    def set_texture(val):
+    def set_texture(self,val):
         self._texture = val
 
-    def set_malignancy(val):
+    def set_malignancy(self,val):
         self._malignancy = val
 
-    def subtlety():
+    def subtlety(self):
         return self._subtlety
 
-    def internal_structure():
+    def internal_structure(self):
         return self._internal_structure
     
-    def calcification():
+    def calcification(self):
         return self._calcification
 
-    def sphericity():
+    def sphericity(self):
         return self._sphericity
 
-    def margin():
+    def margin(self):
         return self._margin
 
     def lobulation():
         return self._lobulation
 
-    def spiculation():
+    def spiculation(self):
         return self._spiculation
 
-    def texture():
+    def texture(self):
         return self._texture
 
-    def malignancy():
+    def malignancy(self):
         return self._malignancy
 
 class Nodule(object):
@@ -100,16 +100,16 @@ class Nodule(object):
         self._characteristics = Characteristics()
         self._roi_list = []
 
-    def noduleID():
+    def noduleID(self):
         return self._noduleID
 
-    def characteristics():
+    def characteristics(self):
         return self._characteristics
 
-    def addCharacteristics(characteristics_):
+    def addCharacteristics(self,characteristics_):
         self._characteristics = characteristics_
 
-    def addROI(roi_):
+    def addROI(self,roi_):
         self._roi_list.append(roi_)
         
 def extract_nodules(src):
