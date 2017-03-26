@@ -93,8 +93,7 @@ class Characteristics(object):
         return self._malignancy
 
 class Nodule(object):
-    """A non-flatbuffers implementation of the Nodule class.
-    """
+    """A non-flatbuffers implementation of the Nodule class."""
     def __init__(self, nodule_id):
         self._noduleID = nodule_id
         self._characteristics = Characteristics()
@@ -206,8 +205,7 @@ def outline_nodule(dcm,contour,dest,color='red'):
     return
 
 def print_image(dcm,dest):
-    """Takes DICOM file dcm and outputs its pixel data to dest as an
-    image."""
+    """Takes DICOM file dcm and outputs its pixel data to dest as an image."""
     dataset = dicom.read_file(dcm)
     im = pdp.get_image(dataset)
     im.save(dest)
