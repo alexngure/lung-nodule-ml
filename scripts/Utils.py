@@ -70,7 +70,7 @@ class Characteristics(object):
 
     def internal_structure():
         return self._internal_structure
-        
+    
     def calcification():
         return self._calcification
 
@@ -111,7 +111,7 @@ class Nodule(object):
 
     def addROI(roi_):
         self._roi_list.append(roi_)
-
+        
 def extract_nodules(src):
     """Parses an LIDC xml file src and returns the list of Nodules found"""
     xmlns                     = "{http://www.nih.gov}"
@@ -225,3 +225,11 @@ def show_image(dcm):
     im = pdp.get_image(dataset)
     im.show()
     return
+
+
+
+
+
+
+
+
