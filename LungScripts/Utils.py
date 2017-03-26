@@ -204,6 +204,11 @@ def fill_nodule(dcm,countour,dest):
     return
 
 def print_image(dcm,dest):
+    """Takes DICOM file dcm and outputs its pixel data to dest as an
+    image."""
+    dataset = dicom.read_file(dcm)
+    im = pdp.get_image(dataset)
+    im.save(dest)
     return
 
 def show_image(dcm):
