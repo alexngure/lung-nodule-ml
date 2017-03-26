@@ -111,12 +111,13 @@ class Nodule(object):
     def addROI(roi_):
         self._roi_list.append(roi_)
 
-def print_image(im,dest):
-    """Takes a LungImage im and outputs a png to dest."""
+def print_image(dcm,dest):
+    """Takes DICOM file dcm and outputs its pixel data as
+    png in dest."""
     return
 
-def show_image(im):
-    """Takes a LungImage im and presents it as a png in a modal view."""
+def show_image(dcm):
+    """Takes DICOM file dcm and presents it as a png in a modal view."""
     return
 
 def extract_nodules(src):
@@ -183,18 +184,15 @@ def extract_nodules(src):
         nodule_list.append(nodule)
     return nodule_list
 
-def outline_nodules(im,dest,sep=True):
-    """Draws a border around each nodule in LungImage im and outputs the
-    resulting png to dest. By default, the method will output a
-    separate image for each Nodule in im. Set sep=False to create a single
-    image.
+def outline_nodules(dcm,contour,dest="."):
+    """Takes DICOM file dcm, overlays the contour (list of (x,y) cordinates) and 
+    outputs the resulting png to dest.
     """
     return
 
-def fill_nodules(im,dest,sep=True):
-    """Fills each Nodule found in im and outputs the resulting png to dest. By default,
-    the method will output separate image for each Nodule in im. Set sep=False
-    to create a single image.
+def fill_nodules(dcm,countour,dest="."):
+    """Takes DICOM file dcm, fills the region outlined by countour (list of (x,y)
+    coordinates), and outputs the resulting png to dest.
     """
     return
 
