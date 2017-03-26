@@ -1,6 +1,7 @@
 import os
 import dicom
 import xml.etree.ElementTree as ET
+import pydicom_PIL as pdp
 from PIL import Image
 
 
