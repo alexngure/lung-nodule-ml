@@ -200,9 +200,9 @@ def process_study(src):
     """Returns a dictionary of (Image SOP UID,filepath) key-value pairs for every
     DICOM image in study src
     """
-    if not os.path.isdir(src):
-        return
     dcm_map = {}
+    if not os.path.isdir(src):
+        return dcm_map
     for root,dirs,files in os.walk(src):
         for file in files:
             file_ext = file.split('.')[1]
