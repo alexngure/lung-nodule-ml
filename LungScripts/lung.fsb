@@ -6,14 +6,15 @@ struct Point {
 }
 
 table Contour {
-   points:[Point];
+   image_SOP_UID:string;
+   inclusion:bool;          //whether or not the described Contour is included as part of the nodule
+   outline:[Point];
 }
 
 table Nodule {
    nodule_id:string;        //unique id for this nodule
    locus:Point;             //approximate centroid of the nodule (optional)
    ROI:Contour;             //points that outline the region of interest (optional)
-   inclusion:bool;          //whether or not the described ROI is included as part of the nodule
    subtlety:int;            //approximate difficulty of detecting this nodule (1-5)
    internal_structure:int;  //expected internal structure (soft tissue, fluid, fat, air) (1-4)
    sphericity:int;          //the roundness of the nodule
