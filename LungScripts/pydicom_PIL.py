@@ -44,9 +44,7 @@ def get_LUT_value(data, window, level):
                          data > (level - 0.5 + (window - 1) / 2)],
                         [0, 255, lambda data: ((data - (level - 0.5)) / (window - 1) + 0.5) * (255 - 0)])
 
-
-# Display an image using the Python Imaging Library (PIL)
-def show_PIL(dataset):
+def get_image(dataset):
     if not have_PIL:
         raise ImportError("Python Imaging Library is not available. See http://www.pythonware.com/products/pil/ to download and install")
     if ('PixelData' not in dataset):
@@ -71,5 +69,4 @@ def show_PIL(dataset):
     else:
         image = get_LUT_value(dataset.pixel_array, dataset.WindowWidth, dataset.WindowCenter)
         im = PIL.Image.fromarray(image).convert('L')  # Convert mode to L since LUT has only 256 values: http://www.pythonware.com/library/pil/handbook/image.htm
-
-    im.show()
+    return im
