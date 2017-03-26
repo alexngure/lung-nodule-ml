@@ -111,15 +111,6 @@ class Nodule(object):
     def addROI(roi_):
         self._roi_list.append(roi_)
 
-def print_image(dcm,dest):
-    """Takes DICOM file dcm and outputs its pixel data as
-    png in dest."""
-    return
-
-def show_image(dcm):
-    """Takes DICOM file dcm and presents it as a png in a modal view."""
-    return
-
 def extract_nodules(src):
     """Parses an LIDC xml file src and returns the list of Nodules found"""
     xmlns                     = "{http://www.nih.gov}"
@@ -184,18 +175,6 @@ def extract_nodules(src):
         nodule_list.append(nodule)
     return nodule_list
 
-def outline_nodule(dcm,contour,dest="."):
-    """Takes DICOM file dcm, overlays the contour (list of (x,y) cordinates) and 
-    outputs the resulting png to dest.
-    """
-    return
-
-def fill_nodule(dcm,countour,dest="."):
-    """Takes DICOM file dcm, fills the region outlined by countour (list of (x,y)
-    coordinates), and outputs the resulting png to dest.
-    """
-    return
-
 def process_study(src):
     """Returns a dictionary of (Image SOP UID,filepath) key-value pairs for every
     DICOM image in study src
@@ -211,3 +190,24 @@ def process_study(src):
                 dcmfile = dicom.read_file(filepath)
                 dcm_map[dcmfile.SOPInstanceUID] = filepath
     return dcm_map
+
+def outline_nodule(dcm,contour,dest="."):
+    """Takes DICOM file dcm, overlays the contour (list of (x,y) cordinates) and
+    outputs the resulting png to dest.
+    """
+    return
+
+def fill_nodule(dcm,countour,dest="."):
+    """Takes DICOM file dcm, fills the region outlined by countour (list of (x,y)
+    coordinates), and outputs the resulting png to dest.
+    """
+    return
+
+def print_image(dcm,dest):
+    """Takes DICOM file dcm and outputs its pixel data as
+    png in dest."""
+    return
+
+def show_image(dcm):
+    """Takes DICOM file dcm and presents it as a png in a modal view."""
+    return
