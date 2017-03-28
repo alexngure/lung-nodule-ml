@@ -28,8 +28,8 @@ table Nodule {
    malignancy:int;          //subjective assessment of likelihood of malignancy of this nodule, ASSUMING  60-year-old male smoker
 }
 
-table DataSet {
+table Dataset {
    data:[Nodule];
 }
 
-root_type DataSet;
+root_type Dataset;
