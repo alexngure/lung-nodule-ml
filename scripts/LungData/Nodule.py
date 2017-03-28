@@ -53,8 +53,8 @@ class Nodule(object):
             x = self._tab.Vector(o)
             x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
             x = self._tab.Indirect(x)
-            from .Contour import Contour
-            obj = Contour()
+            from .RegionOfInterest import RegionOfInterest
+            obj = RegionOfInterest()
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
