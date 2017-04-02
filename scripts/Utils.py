@@ -164,12 +164,16 @@ def extract_nodules(src):
             nodule.addCharacteristics(char_object)
         for roi in session.findall(roi_key):
             image_UID = roi.find(image_UID_key).text
-            inclusion = roi.find(inclusion_key)
             roi_outline   = []
             for point in roi.findall(edgemap_key):
                 x_coord = point.find(x_coord_key).text
                 y_coord = point.find(y_coord_key).text
                 roi_outline.append((int(x_coord),int(y_coord)))
+            inclusion = roi.find(inclusion_key).text
+            if inclusion == 'TRUE':
+                inclusion = True
+            else:
+                inclusion = False
             roi_object = ROI(image_UID,inclusion,roi_outline)
             nodule.addROI(roi_object)
         nodule_list.append(nodule)
