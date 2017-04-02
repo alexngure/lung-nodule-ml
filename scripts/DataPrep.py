@@ -58,4 +58,23 @@ def create_FBNodule(builder,my_nodule):
     nodule = FBNodule.NoduleEnd(builder)
     return nodule
 
+def create_dataset_buffer(lidc_xml):
+    """Takes a list of LIDC xml files and creates a flatbuffers Dataset
+    object."""
+    builder = flatbuffers.Builder(0)
+    nodule_list = []
+    for xml_file in lidc_xml:
+        nodule_list.extend(extract_nodules(xml_file))
+    nodule_vec = []
+    for item in nodule_list:
+        nodule_vec.append(create_FBNodule(builder,item))
+    FBDataset.DatasetStartDataVector(builder,len(nodule_vec))
+    for nodule in nodule_vec:
+        builder.PrependUOffsetTRelative(nodule)
+    data = builder.EndVector(len(nodule_list))
+    FBDataset.DatasetStart(builder)
+    FBDataset.DatasetAddData(builder,data)
+    dataset = FBDataset.DatasetEnd(builder)
+    builder.Finish(dataset)
+    return builder.Bytes,builder.head
 
