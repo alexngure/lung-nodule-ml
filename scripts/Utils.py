@@ -165,6 +165,9 @@ def extract_nodules(src):
             char_object.set_texture(int(texture))
             char_object.set_malignancy(int(malignancy))
             nodule.addCharacteristics(char_object)
+        else:
+            nodule.addCharacteristics(None)
+
         for roi in session.findall(roi_key):
             roi_outline   = []
             for point in roi.findall(edgemap_key):
