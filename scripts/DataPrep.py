@@ -12,11 +12,6 @@ import LungData.Dataset as FBDataset
 
 from Utils import extract_nodules, outline_nodule, print_image
 
-LIDC_XML_DIR = ""
-DCM_FILE_MAP_JSON = ""
-RAW_IMAGE_DIR = ""
-PROCESSED_IMAGE_DIR = ""
-BIN_DEST = ""
 
 
 
