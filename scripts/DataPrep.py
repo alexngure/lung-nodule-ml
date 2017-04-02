@@ -1,8 +1,10 @@
 import os
 import sys
 import json
+import progressbar
 
 import flatbuffers
+import LungData
 import LungData.Point as FBPoint
 import LungData.RegionOfInterest as FBROI
 import LungData.Nodule as FBNodule
