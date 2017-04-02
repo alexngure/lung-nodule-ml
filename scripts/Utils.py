@@ -4,7 +4,6 @@ import xml.etree.ElementTree as ET
 import OSS.pydicom_PIL as pdp
 from PIL import Image,ImageColor,ImageDraw
 
-
 class ROI(object):
     """A non-flatbuffers implementation of the Contour class. Created
     primarily to hold the Nodule information returned from the xml
@@ -43,7 +42,7 @@ class Characteristics(object):
 
     def set_internal_structure(self,val):
         self._internal_structure = val
-        
+
     def set_calcification(self,val):
         self._calcification = val
 
@@ -70,7 +69,7 @@ class Characteristics(object):
 
     def internal_structure(self):
         return self._internal_structure
-    
+
     def calcification(self):
         return self._calcification
 
@@ -110,7 +109,7 @@ class Nodule(object):
 
     def addROI(self,roi_):
         self._roi_list.append(roi_)
-        
+
 def extract_nodules(src):
     """Parses an LIDC xml file src and returns the list of Nodules found"""
     xmlns                     = "{http://www.nih.gov}"
@@ -163,12 +162,12 @@ def extract_nodules(src):
             char_object.set_malignancy(int(malignancy))
             nodule.addCharacteristics(char_object)
         for roi in session.findall(roi_key):
-            image_UID = roi.find(image_UID_key).text
             roi_outline   = []
             for point in roi.findall(edgemap_key):
                 x_coord = point.find(x_coord_key).text
                 y_coord = point.find(y_coord_key).text
                 roi_outline.append((int(x_coord),int(y_coord)))
+            image_UID = roi.find(image_UID_key).text
             inclusion = roi.find(inclusion_key).text
             if inclusion == 'TRUE':
                 inclusion = True
