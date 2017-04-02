@@ -104,6 +104,9 @@ class Nodule(object):
     def characteristics(self):
         return self._characteristics
 
+    def ROI_list(self):
+        return self._roi_list
+
     def addCharacteristics(self,characteristics_):
         self._characteristics = characteristics_
 
