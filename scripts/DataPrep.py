@@ -78,3 +78,20 @@ def create_dataset_buffer(lidc_xml):
     builder.Finish(dataset)
     return builder.Bytes,builder.head
 
+def main():
+    """Create a Dataset object and output the resulting buffer as a binary
+    file
+    """
+    lidc_xml_dir = ""
+    xml_files = []
+    for file in os.listdir(lidc_xml_dir):
+        xml_files.append(os.path.join(LIDC_XML_DIR,file))
+
+    databuffer,head=create_dataset_buffer(xml_files)
+
+    bin_dest = ""
+    with open(bin_dest,'wb') as bin_file:
+        bin_file.write(databuffer[head:])
+
+if __name__ == '__main__':
+    main()
