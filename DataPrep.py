@@ -85,7 +85,7 @@ def main():
     lidc_xml_dir = ""
     xml_files = []
     for file in os.listdir(lidc_xml_dir):
-        xml_files.append(os.path.join(LIDC_XML_DIR,file))
+        xml_files.append(os.path.join(lidc_xml_dir,file))
 
     databuffer,head=create_dataset_buffer(xml_files)
 
