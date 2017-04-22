@@ -21,3 +21,5 @@ b_conv1 = bias_variable([32])
 
 x_image = tf.reshape(x,[-1,28,28,1])
 
+h_conv1 = tf.nn.relu(conv2d(x_image,W_conv1) + b_conv1)
+h_pool1 = max_pool_2x2(h_conv1)
