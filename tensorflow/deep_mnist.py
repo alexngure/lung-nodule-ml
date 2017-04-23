@@ -1,6 +1,5 @@
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets("MNIST_data/",one_hot=True)
 
 def weight_variable(shape):
     initial = tf.truncated_normal(shape,stddev=0.1)
@@ -45,3 +44,7 @@ def deepnn(x):
     
     y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
     return y_conv,keep_prob
+
+def main():
+    mnist = input_data.read_data_sets("MNIST_data/",one_hot=True)
+    
