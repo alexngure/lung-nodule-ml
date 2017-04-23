@@ -48,3 +48,8 @@ def deepnn(x):
 def main():
     mnist = input_data.read_data_sets("MNIST_data/",one_hot=True)
     
+    x = tf.placeholder(tf.float32,[None,784])
+    y_ = tf.placeholder(tf.float32, [None,10])
+    y_conv,keep_prob = deepnn(x)
+    
+    
