@@ -1,0 +1,16 @@
+namespace Model;
+file_extention "data";
+struct Header{
+  num_examples:uint; //number of examples in this training set
+}
+
+table Example{
+  input:[float];
+  output:[float];
+}
+
+table TrainingSet{
+  dataset:[Example];
+}
+
+root_type TrainingSet;
