@@ -1,6 +1,10 @@
 namespace Model;
 file_extention "data";
 struct Header{
+  input_rows:uint; //number of rows in the input for this training set
+  input_cols:uint; //number of columns
+  output_rows:uint; //number of rows in the output for this training set
+  output_cols:uint; //number of columns
   num_examples:uint; //number of examples in this training set
 }
 
