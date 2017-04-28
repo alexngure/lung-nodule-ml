@@ -1,5 +1,7 @@
-namespace Model;
+namespace TrainingData;
+
 file_extention "data";
+
 struct Header{
   input_rows:uint; //number of rows in the input for this training set
   input_cols:uint; //number of columns
