@@ -23,3 +23,4 @@ with tf.Session() as sesh:
             train_accuracy = accuracy.eval(feed_dict={x:batch_xs,y_:batch_ys})
             print('Step %d, training accuracy %g'(i,train_accuracy))
         train_step.run(feed_dict={x:batch_xs,y_:batch_ys})
+    print('test accuracy %g'%accuracy.eval(feed_dict={x:data.test_images, y_:data.test_labels}))
