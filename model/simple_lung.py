@@ -12,3 +12,6 @@ train_step = tf.nn.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.arg_max(y,1),tf.arg_max(y_,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
 
+iterations = 5000
+batch_size = 10
+
