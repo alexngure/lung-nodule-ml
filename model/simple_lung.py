@@ -19,3 +19,7 @@ with tf.Session() as sesh:
     sesh.run(tf.global_variables_initializer().run())
     for _ in range(iterations):
         batch_xs,batch_ys = data.next_batch(batch_size)
+        if i%100 == 0:
+            train_accuracy = accuracy.eval(feed_dict={x:batch_xs,y_:batch_ys})
+            print('Step %d, training accuracy %g'(i,train_accuracy))
+        train_step.run(feed_dict={x:batch_xs,y_:batch_ys})
