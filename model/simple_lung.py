@@ -15,3 +15,5 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
 iterations = 5000
 batch_size = 10
 
+with tf.Session() as sesh:
+    sesh.run(tf.global_variables_initializer().run())
