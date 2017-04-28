@@ -1,6 +1,6 @@
 namespace TrainingData;
 
-file_extention "data";
+file_extension "data";
 
 struct Header{
   input_rows:uint; //number of rows in the input for this training set
