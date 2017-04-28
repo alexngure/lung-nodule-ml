@@ -17,3 +17,4 @@ batch_size = 10
 
 with tf.Session() as sesh:
     sesh.run(tf.global_variables_initializer().run())
+    for _ in range(iterations):
