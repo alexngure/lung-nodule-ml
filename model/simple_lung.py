@@ -1,4 +1,5 @@
 import tensorflow as tf
+from DataManager import DataLoader
 
 x = tf.placeholder(tf.float32, [None,512*512])
 W = tf.Variable(tf.zeros([512*512,2]))
@@ -14,6 +15,8 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
 
 iterations = 5000
 batch_size = 10
+
+data = DataLoader('../data/training_set_raw.data')
 
 with tf.Session() as sesh:
     sesh.run(tf.global_variables_initializer().run())
