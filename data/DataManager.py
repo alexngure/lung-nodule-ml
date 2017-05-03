@@ -16,3 +16,10 @@ class DataLoader(object):
     def next_batch(self,batch_size):
         return
 
+class DataCreator(object):
+    """A class to convert raw data into its representational state (ex.
+    a raw image into a 2D matrix of floats), and write it to disk in a
+    convenient format."""
+    def __init__(self,src,dest):
+        self.src = src
+        self.dest = dest
