@@ -214,17 +214,23 @@ def outline_nodule(dcm,contour,dest,color='red'):
     im.save(dest)
     return
 
-def print_image(dcm,dest):
-    """Takes DICOM file dcm and outputs its pixel data to dest as an image."""
+def get_image(dcm):
+    """Takes DICOM file dcm and returns its pixel data
+     as a PIL image object
+     """
     dataset = dicom.read_file(dcm)
     im = pdp.get_image(dataset)
+    return im
+
+def print_image(dcm,dest):
+    """Takes DICOM file dcm and outputs its pixel data to dest as an image."""
+    im = get_image(dcm)
     im.save(dest)
     return
 
 def show_image(dcm):
     """Takes DICOM file dcm and presents it as a png in a modal view."""
-    dataset = dicom.read_file(dcm)
-    im = pdp.get_image(dataset)
+    im = get_image(dcm)
     im.show()
     return
 
