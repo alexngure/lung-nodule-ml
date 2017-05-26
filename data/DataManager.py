@@ -1,4 +1,4 @@
-
+import flatbuffers
 import TrainingData.Example as FBExample
 import TrainingData.Header as FBHeader
 import TrainingData.TrainingSet as FBTrainingSet
@@ -35,6 +35,7 @@ class DataCreator(object):
         self.dest = dest
         self.num_examples = 0
         self.builder = flatbuffer.Builder(0)
+        self.examples = []
     def add_example(self,src):
         """Takes DICOM file 'src' and extracts its pixel data, and flattens
         its into a vector to create a training example.
