@@ -55,3 +55,44 @@ class DataCreator(object):
          added so far.
          """
         return
+
+class DataBuffer(object):
+    """A class that provides convenient accessors into a .lng data
+    buffer.
+    """
+    def __init__(self,src):
+        self.src = src
+        
+    def get_nodule(self,nodule_ID):
+        """Returns a Utils.Nodule object for nodule with the specified
+        nodule_ID.
+        """
+        return
+
+    def show_nodule(self,nodule_ID,outlined=True,filled=True):
+        """Displays the DICOM instance containing the nodule with the specified
+        ID as a png image.
+        """
+        return
+
+    def print_nodule(self,nodule_ID,dest):
+        """Outputs the DICOM instance containing the nodule with the specified ID
+        as a png image in dest.
+        """
+        return
+
+    def get_image(self,nodule_ID):
+        """Returns a PIL image object for the DICOM instance containing
+        nodule with the specified ID.
+        """
+        return
+
+    def get_dcm(self,nodule_ID):
+        """Returns a pydicom DICOM object for the instance containing nodule
+        with the specified nodule_ID.
+        """
+        return
+
+    def size(self):
+        """Returns the total number of nodules in this DataBuffer."""
+        return
