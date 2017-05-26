@@ -239,3 +239,9 @@ def fill_nodule(dcm,countour,dest,color='red'):
     coordinates), and outputs the resulting image to dest.
     """
     return
+
+def segment_lung(dcm):
+    """Takes chest CT scan as DICOM file dcm and returns an image
+    containing the segmented lung area.
+    """
+    return
