@@ -1,3 +1,4 @@
+import random
 import flatbuffers
 import TrainingData.Example as FBExample
 import TrainingData.Header as FBHeader
@@ -7,23 +8,52 @@ from Utils import get_image
 
 class DataLoader(object):
     """A class to facilitate data loading during training and testing."""
-    def __init__(self, path, train_percent = 0.8):
-        self.path = ''
+    def __init__(self, positive_path, negative_path, train_percent = 0.8):
         self.test_images = ''
         self.test_labels = ''
         self.train_percent = train_percent
         self.test_percent = 1 - train_percent
-    def load_data(self,src=self.path):
-        """Load data file via the path specified at object initialization
-        or 'src'
-        """
-        return
+
+        self.positive_path = positive_path
+        self.positive_cases = []
+        for (path,dirs,files) in os.walk(positive_path):
+            self.positive_cases.extend(files)
+            break
+
+        self.negative_path = negative_path
+        self.negative_cases = []
+        for (path,dirs,files) in os.walk(negative_path):
+            self.negative_cases.extend(files)
+            break
+
+        self.n_positive = len(self.positive_cases)*train_percent
+        self.n_negative = len(self.negative_cases)*train_percent
 
     def next_batch(self,batch_size):
         """Return a minibatch of the specified size from
         the loaded dataset.
         """
-        return
+        num_cases = batch/2
+        random.seed()
+        for i in range(0,num_cases):
+            pos_idx = random.randint(0,self.n_positive)
+            neg_idx = random.randint(0,self.n_negative)
+
+            pos_path = os.path.join(self.positive_path, self.positive_cases[pos_idx])
+            neg_path = os.path.join(self.negative_path, self.negative_cases[neg_idx])
+
+            # Do some transformations here:
+            #   * Rotate with some probability r
+            #   * Flip with some probability f
+            #   * Deform with some probability d
+            pos_case = fetch_case(pos_path)
+            neg_case = fetch_case(neg_case)
+        return batch
+
+    def fetch_case(self,path)
+        """Return load image at 'path' and return it
+        as a 2D array of pixel intensity values.
+        """
 
 class DataCreator(object):
     """A class to convert raw data into its representational state (ex.
