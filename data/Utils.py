@@ -1,3 +1,4 @@
+import cv2
 import os
 import dicom
 import xml.etree.ElementTree as ET
@@ -244,4 +245,17 @@ def segment_lung(dcm):
     """Takes chest CT scan as DICOM file dcm and returns an image
     containing the segmented lung area.
     """
-    return
+    ds = dicom.read_file(dcm)
+    hu_array = ds.pixel_array*ds.RescaleSlope + ds.RescaleIntercept
+    ret,thresh = cv2.threshold(hu_array,-480,255,cv2.THRESH_BINARY)
+    thresh_filled = thresh.astype(np.uint8)
+    h,w = thresh_filled.shape[:2]
+    mask = np.zeros((h+2,w+2),np.uint8)
+    cv2.floodFill(thresh_filled,mask,(0,0),255)
+    kernel = np.zeros((3,3),np.uint8)
+    img_dilated = cv2.dilate(thresh_filled,kernel)
+    image = pdp.get_LUT_value(hu_array,ds.WindowWidth,ds.WindowCenter).astype(np.uint32)
+    x = image | img_dilated
+    x = np.piecewise(x,[x == 255, x < 255], [lambda x : 0, lambda x: x])
+    lung_img = PIL.Image.fromarray(x).convert('L')
+    return lung_img
