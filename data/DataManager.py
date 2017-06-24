@@ -50,6 +50,11 @@ class DataLoader(object):
             neg_case = fetch_case(neg_case)
         return batch
 
+    def fetch_case(self,path)
+        """Return load image at 'path' and return it
+        as a 2D array of pixel intensity values.
+        """
+
 class DataCreator(object):
     """A class to convert raw data into its representational state (ex.
     a raw image into a 2D matrix of floats), and write it to disk in a
