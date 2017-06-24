@@ -27,8 +27,8 @@ class DataLoader(object):
             self.negative_cases.extend(files)
             break
 
-        self.n_positive = len(self.positive_cases)*train_percent
-        self.n_negative = len(self.negative_cases)*train_percent
+        self.n_positive = int(len(self.positive_cases)*train_percent)
+        self.n_negative = int(len(self.negative_cases)*train_percent)
 
     def next_batch(self,batch_size):
         """Return a minibatch of the specified size from
