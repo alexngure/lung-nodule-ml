@@ -7,17 +7,11 @@ from Utils import get_image
 
 class DataLoader(object):
     """A class to facilitate data loading during training and testing."""
-    def __init__(self, path, train_percent = 0.8):
-        self.path = ''
+    def __init__(self, positive_path, negative_path, train_percent = 0.8):
         self.test_images = ''
         self.test_labels = ''
         self.train_percent = train_percent
         self.test_percent = 1 - train_percent
-    def load_data(self,src=self.path):
-        """Load data file via the path specified at object initialization
-        or 'src'
-        """
-        return
 
     def next_batch(self,batch_size):
         """Return a minibatch of the specified size from
