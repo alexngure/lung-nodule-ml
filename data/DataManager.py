@@ -24,6 +24,10 @@ class DataLoader(object):
         for (path,dirs,files) in os.walk(negative_path):
             self.negative_cases.extend(files)
             break
+
+        self.n_positive = len(self.positive_cases)*train_percent
+        self.n_negative = len(self.negative_cases)*train_percent
+
     def next_batch(self,batch_size):
         """Return a minibatch of the specified size from
         the loaded dataset.
