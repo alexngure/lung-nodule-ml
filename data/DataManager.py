@@ -51,6 +51,22 @@ class DataLoader(object):
         labels   = np.stack(labels)
         return examples,labels
 
+    def test_examples(self):
+        """Returns the examples reserved for testing."""
+        examples = []
+        labels   = []
+        for i in range(self.n_positive,len(self.positive_cases)-1):
+            pos_path = os.path.join(self.positive_path, self.positive_cases[i])
+            examples.append(load_image(pos_path))
+            labels.append([1,0])
+        for i in range(self.n_negative,len(self.negative_cases)-1):
+            neg_path = os.path.join(self.negative_path, self.negative_cases[i])
+            examples.append(load_image(neg_path))
+            labels.append([0,1])
+        examples = np.stack(examples)
+        labels   = np.stack(labels)
+        return examples,labels
+
 class DataCreator(object):
     """A class to convert raw data into its representational state (ex.
     a raw image into a 2D matrix of floats), and write it to disk in a
