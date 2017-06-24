@@ -10,19 +10,17 @@ from Utils import get_image,Nodule
 class DataLoader(object):
     """A class to facilitate data loading during training and testing."""
     def __init__(self, positive_path, negative_path, train_percent = 0.8):
-        self.test_images = ''
-        self.test_labels = ''
-        self.train_percent = train_percent
-        self.test_percent = 1 - train_percent
-
-        self.positive_path = positive_path
+        self.train_percent  = train_percent
+        self.test_percent   = 1 - train_percent
+        self.positive_path  = positive_path
         self.positive_cases = []
+        self.negative_path  = negative_path
+        self.negative_cases = []
+
         for (path,dirs,files) in os.walk(positive_path):
             self.positive_cases.extend(files)
             break
 
-        self.negative_path = negative_path
-        self.negative_cases = []
         for (path,dirs,files) in os.walk(negative_path):
             self.negative_cases.extend(files)
             break
