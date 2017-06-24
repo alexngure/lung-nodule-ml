@@ -13,6 +13,12 @@ class DataLoader(object):
         self.train_percent = train_percent
         self.test_percent = 1 - train_percent
 
+        self.positive_path = positive_path
+        self.positive_cases = []
+        for (path,dirs,files) in os.walk(positive_path):
+            self.positive_cases.extend(files)
+            break
+
     def next_batch(self,batch_size):
         """Return a minibatch of the specified size from
         the loaded dataset.
