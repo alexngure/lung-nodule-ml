@@ -1,10 +1,11 @@
 import random
 import flatbuffers
+import LungData.Dataset as FBDataset
 import TrainingData.Example as FBExample
 import TrainingData.Header as FBHeader
 import TrainingData.TrainingSet as FBTrainingSet
 import numpy as np
-from Utils import get_image
+from Utils import get_image,Nodule
 
 class DataLoader(object):
     """A class to facilitate data loading during training and testing."""
@@ -90,25 +91,47 @@ class DataBuffer(object):
     """A class that provides convenient accessors into a .lng data
     buffer.
     """
-    def __init__(self,src):
+    def __init__(self,src,instance_map):
         self.src = src
-        
+        self.dataset = read_lng(src)
+        self.size = len(self.dataset)
+        self.instance_map = instance_map
+
+    def read_lng(self,src):
+        """Reads .lng file src and returns a dictionary object of
+        (nodule_ID,Utils.Nodule) key-value pairs.
+        """
+        buf = open(src,'rb').read()
+        buf = bytearray(buf)
+        dataset_buf = FBDataset.GetRootAsDataset(buf,0)
+        dataset = {}
+        for i in range(0,dataset_buf.DataLength()):
+            fb_nodule = dataset_buf.Data(i)
+            dataset[fb_nodule.NoduleId()] = fb_nodule
+        return dataset
+
     def get_nodule(self,nodule_ID):
-        """Returns a Utils.Nodule object for nodule with the specified
+        """Returns a LungData.Nodule object for nodule with the specified
         nodule_ID.
         """
-        return
+        try:
+            return dataset[nodule_ID]
+        except:
+            return None
 
     def show_nodule(self,nodule_ID,outlined=True,filled=True):
         """Displays the DICOM instance containing the nodule with the specified
         ID as a png image.
         """
+
         return
 
-    def print_nodule(self,nodule_ID,dest):
+    def print_nodule(self,nodule_ID,dest,outlined=False,filled=False):
         """Outputs the DICOM instance containing the nodule with the specified ID
         as a png image in dest.
         """
+        nodule = self.dataset[nodule_ID]
+
         return
 
     def get_image(self,nodule_ID):
@@ -125,4 +148,4 @@ class DataBuffer(object):
 
     def size(self):
         """Returns the total number of nodules in this DataBuffer."""
-        return
+        return self.size
