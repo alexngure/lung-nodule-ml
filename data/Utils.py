@@ -2,10 +2,11 @@ import cv2
 import sys
 import os
 import dicom
+import numpy as np
 import LungData.Nodule as FBNodule
 import xml.etree.ElementTree as ET
-import OSS.pydicom_PIL as pdp
 from PIL import Image,ImageColor,ImageDraw
+from dicom.contrib.pydicom_PIL import get_LUT_value
 
 class ROI(object):
     """A non-flatbuffers implementation of the Contour class. Created
@@ -222,8 +223,16 @@ def get_image(dcm):
      as a PIL image object
      """
     dataset = dicom.read_file(dcm)
-    im = pdp.get_image(dataset)
-    return im
+    pixel_data = dataset.pixel_array*dataset.RescaleSlope + dataset.RescaleIntercept
+    window_width = dataset.WindowWidth
+    window_center = dataset.WindowCenter
+    if not isinstance(window_center,float):
+        window_center = window_center[1]
+    if not isinstance(window_width,float):
+        window_width = window_width[1]
+    image = get_LUT_value(pixel_data, window_width, window_center)
+    image = Image.fromarray(image).convert('L')
+    return image
 
 def print_image(dcm,dest):
     """Takes DICOM file dcm and outputs its pixel data to dest as an image."""
@@ -236,6 +245,14 @@ def show_image(dcm):
     im = get_image(dcm)
     im.show()
     return
+
+def load_image(src):
+    """Loads image from 'src' and returns a 2D matrix of pixel
+    intensity values.
+    """
+    im  = Image.open(src)
+    arr = np.array(im)
+    return arr
 
 def fill_nodule(dcm,countour,dest,color='red'):
     """Takes DICOM file dcm, fills the region outlined by countour (list of (x,y)

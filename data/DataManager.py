@@ -1,3 +1,5 @@
+import os
+import traceback
 import random
 import flatbuffers
 import LungData.Dataset as FBDataset
@@ -5,56 +7,66 @@ import TrainingData.Example as FBExample
 import TrainingData.Header as FBHeader
 import TrainingData.TrainingSet as FBTrainingSet
 import numpy as np
-from Utils import get_image,Nodule
+from Utils import get_image,load_image,Nodule
+from PIL import Image
 
 class DataLoader(object):
     """A class to facilitate data loading during training and testing."""
     def __init__(self, positive_path, negative_path, train_percent = 0.8):
-        self.test_images = ''
-        self.test_labels = ''
-        self.train_percent = train_percent
-        self.test_percent = 1 - train_percent
-
-        self.positive_path = positive_path
+        self.train_percent  = train_percent
+        self.test_percent   = 1 - train_percent
+        self.positive_path  = positive_path
         self.positive_cases = []
+        self.negative_path  = negative_path
+        self.negative_cases = []
+
         for (path,dirs,files) in os.walk(positive_path):
             self.positive_cases.extend(files)
             break
 
-        self.negative_path = negative_path
-        self.negative_cases = []
         for (path,dirs,files) in os.walk(negative_path):
             self.negative_cases.extend(files)
             break
 
-        self.n_positive = len(self.positive_cases)*train_percent
-        self.n_negative = len(self.negative_cases)*train_percent
+        self.n_positive = int(len(self.positive_cases)*train_percent)
+        self.n_negative = int(len(self.negative_cases)*train_percent)
 
     def next_batch(self,batch_size):
         """Return a minibatch of the specified size from
         the loaded dataset.
         """
-        num_cases = batch/2
+        num_cases = int(batch_size/2)
+        examples = []
+        labels   = []
         random.seed()
         for i in range(0,num_cases):
-            pos_idx = random.randint(0,self.n_positive)
-            neg_idx = random.randint(0,self.n_negative)
+            pos_idx     = random.randint(0,self.n_positive)
+            neg_idx     = random.randint(0,self.n_negative)
+            pos_path    = os.path.join(self.positive_path, self.positive_cases[pos_idx])
+            neg_path    = os.path.join(self.negative_path, self.negative_cases[neg_idx])
+            examples.append(load_image(pos_path))
+            labels.append([1,0])
+            examples.append(load_image(neg_path))
+            labels.append([0,1])
+        examples = np.stack(examples)
+        labels   = np.stack(labels)
+        return examples,labels
 
-            pos_path = os.path.join(self.positive_path, self.positive_cases[pos_idx])
-            neg_path = os.path.join(self.negative_path, self.negative_cases[neg_idx])
-
-            # Do some transformations here:
-            #   * Rotate with some probability r
-            #   * Flip with some probability f
-            #   * Deform with some probability d
-            pos_case = fetch_case(pos_path)
-            neg_case = fetch_case(neg_case)
-        return batch
-
-    def fetch_case(self,path)
-        """Return load image at 'path' and return it
-        as a 2D array of pixel intensity values.
-        """
+    def test_examples(self):
+        """Returns the examples reserved for testing."""
+        examples = []
+        labels   = []
+        for i in range(self.n_positive,len(self.positive_cases)-1):
+            pos_path = os.path.join(self.positive_path, self.positive_cases[i])
+            examples.append(load_image(pos_path))
+            labels.append([1,0])
+        for i in range(self.n_negative,len(self.negative_cases)-1):
+            neg_path = os.path.join(self.negative_path, self.negative_cases[i])
+            examples.append(load_image(neg_path))
+            labels.append([0,1])
+        examples = np.stack(examples)
+        labels   = np.stack(labels)
+        return examples,labels
 
 class DataCreator(object):
     """A class to convert raw data into its representational state (ex.
@@ -67,6 +79,7 @@ class DataCreator(object):
         self.num_examples = 0
         self.builder = flatbuffer.Builder(0)
         self.examples = []
+
     def add_example(self,src):
         """Takes DICOM file 'src' and extracts its pixel data, and flattens
         its into a vector to create a training example.
@@ -123,7 +136,6 @@ class DataBuffer(object):
         """Displays the DICOM instance containing the nodule with the specified
         ID as a png image.
         """
-
         return
 
     def print_nodule(self,nodule_ID,dest,outlined=False,filled=False):
@@ -131,7 +143,6 @@ class DataBuffer(object):
         as a png image in dest.
         """
         nodule = self.dataset[nodule_ID]
-
         return
 
     def get_image(self,nodule_ID):
