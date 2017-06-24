@@ -34,23 +34,22 @@ class DataLoader(object):
         """Return a minibatch of the specified size from
         the loaded dataset.
         """
-        num_cases = batch/2
+        num_cases = int(batch_size/2)
+        examples = []
+        labels   = []
         random.seed()
         for i in range(0,num_cases):
-            pos_idx = random.randint(0,self.n_positive)
-            neg_idx = random.randint(0,self.n_negative)
-
-            pos_path = os.path.join(self.positive_path, self.positive_cases[pos_idx])
-            neg_path = os.path.join(self.negative_path, self.negative_cases[neg_idx])
-
-            # Do some transformations here:
-            #   * Rotate with some probability r
-            #   * Flip with some probability f
-            #   * Deform with some probability d
-            pos_case = fetch_case(pos_path)
-            neg_case = fetch_case(neg_case)
-        return batch
-
+            pos_idx     = random.randint(0,self.n_positive)
+            neg_idx     = random.randint(0,self.n_negative)
+            pos_path    = os.path.join(self.positive_path, self.positive_cases[pos_idx])
+            neg_path    = os.path.join(self.negative_path, self.negative_cases[neg_idx])
+            examples.append(load_image(pos_path))
+            labels.append([1,0])
+            examples.append(load_image(neg_path))
+            labels.append([0,1])
+        examples = np.stack(examples)
+        labels   = np.stack(labels)
+        return examples,labels
 
 class DataCreator(object):
     """A class to convert raw data into its representational state (ex.
