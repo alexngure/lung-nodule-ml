@@ -231,7 +231,7 @@ def get_image(dcm):
     if not isinstance(window_width,float):
         window_width = window_width[1]
     image = get_LUT_value(pixel_data, window_width, window_center)
-    image = PIL.Image.fromarray(image).convert('L')
+    image = Image.fromarray(image).convert('L')
     return image
 
 def print_image(dcm,dest):
@@ -250,7 +250,7 @@ def load_image(src):
     """Loads image from 'src' and returns a 2D matrix of pixel
     intensity values.
     """
-    im = PIL.Image.open(src)
+    im  = Image.open(src)
     arr = np.array(im)
     return arr
 

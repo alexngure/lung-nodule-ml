@@ -63,6 +63,7 @@ class DataCreator(object):
         self.num_examples = 0
         self.builder = flatbuffer.Builder(0)
         self.examples = []
+
     def add_example(self,src):
         """Takes DICOM file 'src' and extracts its pixel data, and flattens
         its into a vector to create a training example.
@@ -119,7 +120,6 @@ class DataBuffer(object):
         """Displays the DICOM instance containing the nodule with the specified
         ID as a png image.
         """
-
         return
 
     def print_nodule(self,nodule_ID,dest,outlined=False,filled=False):
@@ -127,7 +127,6 @@ class DataBuffer(object):
         as a png image in dest.
         """
         nodule = self.dataset[nodule_ID]
-
         return
 
     def get_image(self,nodule_ID):
