@@ -1,3 +1,4 @@
+import random
 import flatbuffers
 import TrainingData.Example as FBExample
 import TrainingData.Header as FBHeader
@@ -32,7 +33,22 @@ class DataLoader(object):
         """Return a minibatch of the specified size from
         the loaded dataset.
         """
-        return
+        num_cases = batch/2
+        random.seed()
+        for i in range(0,num_cases):
+            pos_idx = random.randint(0,self.n_positive)
+            neg_idx = random.randint(0,self.n_negative)
+
+            pos_path = os.path.join(self.positive_path, self.positive_cases[pos_idx])
+            neg_path = os.path.join(self.negative_path, self.negative_cases[neg_idx])
+
+            # Do some transformations here:
+            #   * Rotate with some probability r
+            #   * Flip with some probability f
+            #   * Deform with some probability d
+            pos_case = fetch_case(pos_path)
+            neg_case = fetch_case(neg_case)
+        return batch
 
 class DataCreator(object):
     """A class to convert raw data into its representational state (ex.
