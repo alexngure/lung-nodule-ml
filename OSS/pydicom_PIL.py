@@ -67,6 +67,13 @@ def get_image(dataset):
         im = PIL.Image.frombuffer(mode, size, dataset.PixelData, "raw", mode, 0, 1)  # Recommended to specify all details by http://www.pythonware.com/library/pil/handbook/image.htm
 
     else:
-        image = get_LUT_value(dataset.pixel_array, dataset.WindowWidth, dataset.WindowCenter)
+        pixel_data = dataset.pixel_array*dataset.RescaleSlope + dataset.RescaleIntercept
+        window_width = dataset.WindowWidth
+        window_center = dataset.WindowCenter
+        if not isinstance(window_center,float):
+            window_center = window_center[1]
+        if not isinstance(window_width,float):
+            window_width = window_width[1]
+        image = get_LUT_value(pixel_data, window_width, window_center)
         im = PIL.Image.fromarray(image).convert('L')  # Convert mode to L since LUT has only 256 values: http://www.pythonware.com/library/pil/handbook/image.htm
     return im
