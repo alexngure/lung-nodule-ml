@@ -1,6 +1,8 @@
 import cv2
+import sys
 import os
 import dicom
+import LungData.Nodule as FBNodule
 import xml.etree.ElementTree as ET
 import OSS.pydicom_PIL as pdp
 from PIL import Image,ImageColor,ImageDraw
