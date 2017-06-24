@@ -80,7 +80,7 @@ class Characteristics(object):
     def margin(self):
         return self._margin
 
-    def lobulation():
+    def lobulation(self):
         return self._lobulation
 
     def spiculation(self):
