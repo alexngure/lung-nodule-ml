@@ -237,6 +237,14 @@ def show_image(dcm):
     im.show()
     return
 
+def load_image(src):
+    """Loads image from 'src' and returns a 2D matrix of pixel
+    intensity values.
+    """
+    im = PIL.Image.open(src)
+    arr = np.array(im)
+    return arr
+
 def fill_nodule(dcm,countour,dest,color='red'):
     """Takes DICOM file dcm, fills the region outlined by countour (list of (x,y)
     coordinates), and outputs the resulting image to dest.
