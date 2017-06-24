@@ -1,3 +1,5 @@
+import os
+import traceback
 import random
 import flatbuffers
 import LungData.Dataset as FBDataset
@@ -5,7 +7,8 @@ import TrainingData.Example as FBExample
 import TrainingData.Header as FBHeader
 import TrainingData.TrainingSet as FBTrainingSet
 import numpy as np
-from Utils import get_image,Nodule
+from Utils import get_image,load_image,Nodule
+from PIL import Image
 
 class DataLoader(object):
     """A class to facilitate data loading during training and testing."""
