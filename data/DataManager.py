@@ -19,6 +19,11 @@ class DataLoader(object):
             self.positive_cases.extend(files)
             break
 
+        self.negative_path = negative_path
+        self.negative_cases = []
+        for (path,dirs,files) in os.walk(negative_path):
+            self.negative_cases.extend(files)
+            break
     def next_batch(self,batch_size):
         """Return a minibatch of the specified size from
         the loaded dataset.
