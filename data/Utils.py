@@ -260,9 +260,15 @@ def fill_nodule(dcm,countour,dest,color='red'):
     """
     return
 
-def segment_lung(dcm):
-    """Takes chest CT scan as DICOM file dcm and returns an image
-    containing the segmented lung area.
+def segment(dcm):
+    """Takes chest CT scan dcm and segments the
+    lung area.
+
+    General idea:
+        1. Binarise the CT image with a HU value of -200
+        2. Floodfill to remove non-lung area
+        3. Dilate to get final mask
+        4. Apply mask on original image
     """
     ds = dicom.read_file(dcm)
     hu_array = ds.pixel_array*ds.RescaleSlope + ds.RescaleIntercept
