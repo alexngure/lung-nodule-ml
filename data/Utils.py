@@ -271,16 +271,19 @@ def segment(dcm):
         4. Apply mask on original image
     """
     ds = dicom.read_file(dcm)
-    hu_array = ds.pixel_array*ds.RescaleSlope + ds.RescaleIntercept
-    ret,thresh = cv2.threshold(hu_array,-480,255,cv2.THRESH_BINARY)
-    thresh_filled = thresh.astype(np.uint8)
-    h,w = thresh_filled.shape[:2]
+    raw_pixels = ds.pixel_array
+    hu_matrix = raw_pixels*ds.RescaleSlope + ds.RescaleIntercept
+    ret,im_threshold = cv2.threshold(hu_matrix,-200,255,cv2.THRESH_BINARY)
+    im_threshold = im_threshold.astype(np.uint8)
+    h,w = im_threshold.shape[:2]
     mask = np.zeros((h+2,w+2),np.uint8)
-    cv2.floodFill(thresh_filled,mask,(0,0),255)
-    kernel = np.zeros((3,3),np.uint8)
-    img_dilated = cv2.dilate(thresh_filled,kernel)
-    image = pdp.get_LUT_value(hu_array,ds.WindowWidth,ds.WindowCenter).astype(np.uint32)
-    x = image | img_dilated
-    x = np.piecewise(x,[x == 255, x < 255], [lambda x : 0, lambda x: x])
-    lung_img = PIL.Image.fromarray(x).convert('L')
-    return lung_img
+    cv2.floodFill(im_threshold,mask,(0,0),255)
+    kernel = np.ones((1,1),np.uint8)
+    im_dilated = cv2.dilate(im_threshold,kernel)
+    im_dilated_inv = np.bitwise_not(im_dilated)
+    final_mask = morphology.binary_fill_holes(im_dilated_inv.astype(np.bool_))
+    final_mask = final_mask.astype(np.uint8)*255
+    raw_img = get_LUT_value(hu_matrix,1600,-600).astype(np.uint32)
+    lung_masked = final_mask & raw_img
+    lung_masked_img = Image.fromarray(lung_masked.astype(np.float)).convert('L')
+    return lung_masked_img
