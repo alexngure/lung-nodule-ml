@@ -1,0 +1,26 @@
+def conv2d(x, W):
+  """conv2d returns a 2d convolution layer with full stride.
+
+  source: tensorflow/deep_mnist.py
+  """
+  return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
+
+
+def max_pool_2x2(x):
+  """max_pool_2x2 downsamples a feature map by 2X.
+
+  source: tensorflow/deep_mnist.py
+  """
+  return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
+                        strides=[1, 2, 2, 1], padding='SAME')
+
+
+def weight_variable(shape):
+  """weight_variable generates a weight variable of a given shape.
+
+  source: tensorflow/deep_mnist.py
+  """
+  initial = tf.truncated_normal(shape, stddev=0.1)
+  return tf.Variable(initial)
+
+
