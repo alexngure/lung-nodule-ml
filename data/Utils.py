@@ -3,6 +3,9 @@ import sys
 import os
 import dicom
 import numpy as np
+from shapely.geometry import Polygon,Point
+import shapely.geometry.geo as geo
+
 import LungData.Nodule as FBNodule
 import xml.etree.ElementTree as ET
 from PIL import Image,ImageColor,ImageDraw
@@ -259,6 +262,42 @@ def fill_nodule(dcm,countour,dest,color='red'):
     coordinates), and outputs the resulting image to dest.
     """
     return
+
+def extract_patch(x,patch_size,ignore_background=False):
+    """Extracts sub-matrices with dimensions 'patch_size'
+    from matrix 'x'.
+    """
+    patch_row = patch_size[0]
+    patch_col = patch_size[1]
+    num_rows  = x.shape[0]
+    num_cols  = x.shape[1]
+    patches   = {}
+    i = 0
+    j = 0
+    while i < num_rows:
+        while j < num_cols:
+            patch = x[i:i+patch_row,j:j+patch_col]
+            if ignore_background and (patch.sum() == 0):
+                j += patch_col
+                continue
+            patches[(i,j)] = patch
+            j += patch_col
+        i += patch_row
+        j = 0
+    return patches
+
+def box_in_region(origin,dim,region):
+    """Checks whether the specified bounding box intersects
+    the provided region.
+
+    Arguments:
+        * origin -- top-left corner of the bounding box
+        * dim    -- bounding box dimensions in the form (num_rows,num_columns)
+        * region -- A list of points that bound a region in the same plane as the bounding box.
+    """
+    bbox = geo.box(origin[0],origin[1],origin[0]+dim[0],origin[1]+dim[1])
+    roi  = Polygon(region)
+    return bbox.intersects(roi)
 
 def segment(dcm):
     """Takes chest CT scan dcm and segments the
