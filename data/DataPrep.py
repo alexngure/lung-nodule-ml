@@ -97,15 +97,15 @@ def main():
     """Create a Dataset object and output the resulting buffer as a binary
     file.
     """
-    lidc_xml_dir = r"lidc-xml/188"
+    lidc_xml_dir = r"lidc-xml/"
     xml_files = []
     for file in os.listdir(lidc_xml_dir):
         xml_files.append(os.path.join(lidc_xml_dir,file))
 
     databuffer,head=create_dataset_buffer(xml_files)
 
-    bin_dest = "lidc-xml/lidc.lng"
-    json_dest = 'lidc-xml/nodule_map.json'
+    bin_dest = "lung_info/lidc.lng"
+    json_dest = 'lung_info/nodule_map.json'
     with open(bin_dest,'wb') as bin_file:
         bin_file.write(databuffer[head:])
 
