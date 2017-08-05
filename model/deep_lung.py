@@ -100,4 +100,11 @@ def bias_variable(shape):
   """
   initial = tf.constant(0.1, shape=shape)
   return tf.Variable(initial)
-  
+
+def generate_batch(batch_size):
+    """Loads and returns a minibatch of size 'batch_size.'"""
+    return
+
+def generate_test_batch(batch_size):
+    """Loads and returns the test set."""
+    return
