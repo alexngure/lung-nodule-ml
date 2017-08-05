@@ -12,14 +12,28 @@ import LungData.Dataset as FBDataset
 
 from Utils import extract_nodules, outline_nodule, print_image
 
+nodule_map = {}
+
 def create_FBROI(builder,my_ROI):
     """Takes an instance of the non-flatbuffers implementation of the ROI class and
     converts it into a buffer.
     """
+    UID_str = my_ROI.image_UID()
     roi_coords = my_ROI.contour()
+    if UID_str not in nodule_map:
+        nodule_map[UID_str] = {}
+        nodule_map[UID_str]['roi_count']  = 0
+    else:
+        nodule_map[UID_str]['roi_count'] += 1
+    roi_count = nodule_map[UID_str]['roi_count']
+    roi_uid = 'roi_'+str(roi_count)
+
+    contour_lst = []
     FBROI.RegionOfInterestStartContourVector(builder,len(roi_coords))
     for coord in my_ROI.contour():
         builder.PrependUOffsetTRelative(FBPoint.CreatePoint(builder,coord[0],coord[1]))
+        contour_lst.append([coord[0],coord[1]])
+    nodule_map[UID_str][roi_uid] = contour_lst
     contour = builder.EndVector(len(roi_coords))
     imageUID = builder.CreateString(my_ROI.image_UID())
     FBROI.RegionOfInterestStart(builder)
@@ -60,7 +74,8 @@ def create_FBNodule(builder,my_nodule):
 
 def create_dataset_buffer(lidc_xml):
     """Takes a list of LIDC xml files and creates a flatbuffers Dataset
-    object."""
+    object.
+    """
     builder = flatbuffers.Builder(0)
     nodule_list = []
     for xml_file in lidc_xml:
@@ -80,18 +95,22 @@ def create_dataset_buffer(lidc_xml):
 
 def main():
     """Create a Dataset object and output the resulting buffer as a binary
-    file
+    file.
     """
-    lidc_xml_dir = ""
+    lidc_xml_dir = r"lidc-xml/188"
     xml_files = []
     for file in os.listdir(lidc_xml_dir):
         xml_files.append(os.path.join(lidc_xml_dir,file))
 
     databuffer,head=create_dataset_buffer(xml_files)
 
-    bin_dest = ""
+    bin_dest = "lidc-xml/lidc.lng"
+    json_dest = 'lidc-xml/nodule_map.json'
     with open(bin_dest,'wb') as bin_file:
         bin_file.write(databuffer[head:])
+
+    with open(json_dest,'w') as json_file:
+        json.dump(nodule_map,json_file,indent=4)
 
 if __name__ == '__main__':
     main()
