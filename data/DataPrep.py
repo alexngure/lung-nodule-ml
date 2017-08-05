@@ -22,7 +22,7 @@ def create_FBROI(builder,my_ROI):
     roi_coords = my_ROI.contour()
     if UID_str not in nodule_map:
         nodule_map[UID_str] = {}
-        nodule_map[UID_str]['roi_count']  = 0
+        nodule_map[UID_str]['roi_count']  = 1
     else:
         nodule_map[UID_str]['roi_count'] += 1
     roi_count = nodule_map[UID_str]['roi_count']
