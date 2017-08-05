@@ -1,3 +1,5 @@
+INPUT_SHAPE = 64,64
+
 def lung_cnn(x):
     """A deep net that identifies nodules in a 2D patch of
     a lung image.
