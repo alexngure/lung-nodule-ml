@@ -24,3 +24,11 @@ def weight_variable(shape):
   return tf.Variable(initial)
 
 
+def bias_variable(shape):
+  """bias_variable generates a bias variable of a given shape.
+
+  source: tensorflow/deep_mnist.py
+  """
+  initial = tf.constant(0.1, shape=shape)
+  return tf.Variable(initial)
+  
