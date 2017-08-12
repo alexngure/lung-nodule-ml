@@ -68,26 +68,33 @@ def lung_cnn(x):
     return y_conv
 
 def conv2d(x, W,strides=[1,1,1,1]):
-  """conv2d returns a 2d convolution layer with specified stride."""
-  return tf.nn.conv2d(x, W, strides=strides, padding='SAME')
+    """conv2d returns a 2d convolution layer with specified stride."""
+    return tf.nn.conv2d(x, W, strides=strides, padding='SAME')
 
 
 def max_pool_2x2(x,strides=[1,2,2,1]):
-  """max_pool_2x2 downsamples a feature map by 2X."""
-  return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
-                        strides=strides, padding='SAME')
+    """max_pool_2x2 downsamples a feature map by 2X."""
+    return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
+                          strides=strides, padding='SAME')
 
 
 def weight_variable(shape,name):
-  """weight_variable generates a weight variable of a given shape."""
-  initial = tf.truncated_normal(shape, stddev=0.1)
-  return tf.Variable(initial,name=name)
+    """weight_variable generates a weight variable of a given shape."""
+    initial = tf.truncated_normal(shape, stddev=0.1)
+    return tf.Variable(initial,name=name)
 
 
 def bias_variable(shape,name):
-  """bias_variable generates a bias variable of a given shape."""
-  initial = tf.constant(0.1, shape=shape)
-  return tf.Variable(initial,name=name)
+    """bias_variable generates a bias variable of a given shape."""
+    initial = tf.constant(0.1, shape=shape)
+    return tf.Variable(initial,name=name)
+
+def load_example(ex):
+    """ex is a list of the form [image_path,image_uid]. load_example
+    opens the image, creates patches, and assigns a positive label
+    to patches with nodule pixels.
+    """
+    return
 
 def generate_batch(batch_size):
     """Loads and returns a minibatch of size 'batch_size.'"""
