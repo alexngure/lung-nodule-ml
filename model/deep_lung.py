@@ -136,3 +136,37 @@ def generate_batch(batch_size,pos_range,neg_range):
             labels[i] = [0,1]
         i += 1
     return batch,labels
+
+x  = tf.placeholder(tf.float32,[None,PIXEL_COUNT])
+y_ = tf.placeholder(tf.float32,[None,NUM_CLASSES])
+y_pred,keep_prob = lung_cnn(x)
+cross_entropy = tf.reduce_mean(
+    tf.nn.softmax_cross_entropy_with_logits(labels=y_,logits=y_pred))
+train_step = tf.train.AdagradOptimizer(LR).minimize(cross_entropy)
+correct_prediction = tf.equal(tf.argmax(y_,1), tf.argmax(y_pred,1))
+accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
+saver = tf.train.Saver()
+sess = tf.Session()
+sess.run(tf.global_variables_initializer())
+avg_loss = 0.0
+acceptable = False
+i = 1
+while acceptable == False:
+    batch_x,batch_y = generate_batch(BATCH_SIZE,TRAIN_POS_RANGE,TRAIN_NEG_RANGE)
+    if i % T_STEPS == 0:
+        feed_dict = {x: batch_x, y_:batch_y, keep_prob:1.0}
+        train_accuracy = sess.run(accuracy,feed_dict=feed_dict)
+        avg_loss /= T_STEPS
+        if avg_loss <= 0.01:
+            acceptable = True
+        print('step %d, train accuracy %g, loss %g' % (i,train_accuracy,avg_loss))
+        avg_loss = 0
+    feed_dict = {x: batch_x, y_:batch_y, keep_prob:0.5}
+    _,loss = sess.run([train_step,cross_entropy],feed_dict=feed_dict)
+    avg_loss += loss
+    if i % SAVE_STEPS == 0:
+        saver.save(sess,os.path.join(log_dir,'lung_net'),i)
+    i+=1
+test_x,test_y = generate_batch(TEST_SIZE,TEST_POS_RANGE,TEST_NEG_RANGE)
+feed_dict = {x: batch_x, y_:batch_y, keep_prob:1.0}
+print('test accuracy %g'%sess.run(accuracy,feed_dict=feed_dict))
