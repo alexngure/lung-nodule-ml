@@ -2,10 +2,40 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import json
 import numpy as np
+import os
+import random
 import tensorflow as tf
 
-INPUT_SHAPE = 64,64
+random.seed(10)
+
+log_dir          = r'logs'
+positive_ex_path = r'lidc_positive.npy'
+negative_ex_path = r'lidc_negative.npy'
+positive_exs     = np.load(positive_ex_path,mmap_mode='r')
+negative_exs     = np.load(negative_ex_path,mmap_mode='r')
+
+NUM_POSITIVE     = positive_exs.shape[0]
+NUM_NEGATIVE     = negative_exs.shape[0]
+TEST_PERCENT     = 0.1
+POS_TEST         = int(NUM_POSITIVE*TEST_PERCENT)
+NEG_TEST         = int(NUM_NEGATIVE*TEST_PERCENT)
+POS_TRAIN        = NUM_POSITIVE - POS_TEST
+NEG_TRAIN        = NUM_NEGATIVE - NEG_TEST
+TRAIN_POS_RANGE  = (0,POS_TRAIN-1)
+TRAIN_NEG_RANGE  = (0,NEG_TRAIN-1)
+TEST_POS_RANGE   = (POS_TEST,NUM_POSITIVE-1)
+TEST_NEG_RANGE   = (NEG_TEST,NUM_NEGATIVE-1)
+INPUT_SHAPE      = 64,64
+PIXEL_COUNT      = INPUT_SHAPE[0]*INPUT_SHAPE[1]
+NUM_CLASSES      = 2
+LR               = 0.01
+ITER             = 150001
+T_STEPS          = 100
+SAVE_STEPS       = 10000
+BATCH_SIZE       = 20
+TEST_SIZE        = 600
 
 def lung_cnn(x):
     """A deep net that identifies nodules in a 2D patch of
