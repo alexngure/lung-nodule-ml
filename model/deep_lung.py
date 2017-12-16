@@ -120,17 +120,19 @@ def bias_variable(shape,name):
     initial = tf.constant(0.1, shape=shape)
     return tf.Variable(initial,name=name)
 
-def load_example(ex):
-    """ex is a list of the form [image_path,image_uid]. load_example
-    opens the image, creates patches, and assigns a positive label
-    to patches with nodule pixels.
-    """
-    return
-
-def generate_batch(batch_size):
+def generate_batch(batch_size,pos_range,neg_range):
     """Loads and returns a minibatch of size 'batch_size.'"""
-    return
-
-def generate_test_batch(batch_size):
-    """Loads and returns the test set."""
-    return
+    batch = np.ndarray(shape=(batch_size,PIXEL_COUNT),dtype=np.float32)
+    labels = np.ndarray(shape=(batch_size,NUM_CLASSES),dtype=np.float32)
+    i = 0
+    while i < batch_size:
+        if np.random.uniform(0,1) > 0.5:
+            idx = random.randint(pos_range[0],pos_range[1])
+            batch[i] = positive_exs[idx].flatten()
+            labels[i] = [1,0]
+        else:
+            idx = random.randint(neg_range[0],neg_range[1])
+            batch[i] = negative_exs[idx].flatten()
+            labels[i] = [0,1]
+        i += 1
+    return batch,labels
